@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdio.h>
 #include "HelloWorldThread.h"
@@ -14,7 +13,7 @@ void createHWThreads()
 	}
 
 	//Sleep main thread to avoid premature halting. Wait for other threads to finish execution.
-	IETThread::sleep(1000);
+	IETThread::sleep(10000);
 }
 
 void testFunctionThread()
@@ -24,6 +23,5 @@ void testFunctionThread()
 
 int main() {
 	//createHWThreads();
-	std::thread myThread(testFunctionThread);
-	myThread.join();
+	createHWThreads();
 }
