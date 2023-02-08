@@ -1,27 +1,38 @@
 #include <iostream>
 #include <stdio.h>
-#include "HelloWorldThread.h"
+#include "DivisorThreads.h"
 #include "IETThread.h"
 #include <thread>
+#include <cmath>
 
-void createHWThreads()
+int TEST_INT = 2147483647;
+int maxThreads = pow(2,1);
+
+void createDivisorThreads()
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 2; i < maxThreads + 2; i++)
 	{
-		HelloWorldThread* thread = new HelloWorldThread(i);
+		DivisorThreads* thread = new DivisorThreads(i, TEST_INT, maxThreads);
 		thread->start();
 	}
 
 	//Sleep main thread to avoid premature halting. Wait for other threads to finish execution.
-	IETThread::sleep(10000);
-}
-
-void testFunctionThread()
-{
-	std::cout << "Hello world from a thread. " << std::endl;
+	IETThread::sleep(1000);
 }
 
 int main() {
-	//createHWThreads();
-	createHWThreads();
+	createDivisorThreads();
+
+	/*
+	for (int i = 2; i < (TEST_INT / 2); i++)
+	{
+		if (TEST_INT % i == 0)
+		{
+			std::cout << "Not a Prime" << std::endl;
+			break;
+		}
+	}
+
+	std::cout << "Prime" << std::endl;
+	*/
 }

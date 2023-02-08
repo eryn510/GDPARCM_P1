@@ -128,11 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DivisorThreads.cpp" />
     <ClCompile Include="HelloWorldThread.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DivisorThreads.h" />
     <ClInclude Include="HelloWorldThread.h" />
     <ClInclude Include="IETThread.h" />
   </ItemGroup>
