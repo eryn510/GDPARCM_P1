@@ -6,22 +6,39 @@
 #include <cmath>
 
 int TEST_INT = 2147483647;
-int maxThreads = pow(2,1);
+int threadCount = 0;
+int maxThreads = pow(2,2);
+bool returnFlag = false;
 
 void createDivisorThreads()
 {
+	if (returnFlag == true)
+		return;
+
 	for (int i = 2; i < maxThreads + 2; i++)
 	{
-		DivisorThreads* thread = new DivisorThreads(i, TEST_INT, maxThreads);
-		thread->start();
+		if (returnFlag == false)
+		{
+			DivisorThreads* thread = new DivisorThreads(TEST_INT, maxThreads, &threadCount, &returnFlag);
+			thread->start();
+			threadCount++;
+		}
+		else
+			break;
+		
 	}
 
-	//Sleep main thread to avoid premature halting. Wait for other threads to finish execution.
-	IETThread::sleep(1000);
+	//IETThread::sleep(1000);
 }
 
 int main() {
+
 	createDivisorThreads();
+
+	while (!returnFlag) 
+	{
+		std::cout << "I am computing. Please wait..." << std::endl;
+	}
 
 	/*
 	for (int i = 2; i < (TEST_INT / 2); i++)

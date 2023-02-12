@@ -5,14 +5,15 @@ class DivisorThreads : public IETThread
 
 {
 public:
-	DivisorThreads(int divisor, int dividend, int maxThreads);
+	DivisorThreads(int dividend, int maxThreads, int* threadCount, bool* returnFlag);
 	~DivisorThreads();
 
 private:
 	void run() override;
 
-	int divisor = 0;
 	int dividend = 0;
 	int maxThreads = 0;
+	int* threadCount;
+	bool* returnFlag;
 };
 

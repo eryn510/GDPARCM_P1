@@ -21,18 +21,12 @@
     <ClCompile Include="IETThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HelloWorldThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DivisorThreads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IETThread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HelloWorldThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DivisorThreads.h">
