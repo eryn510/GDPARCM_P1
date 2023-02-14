@@ -5,7 +5,7 @@ class DivisorThreads : public IETThread
 
 {
 public:
-	DivisorThreads(int dividend, int maxThreads, int* threadCount, bool* returnFlag);
+	DivisorThreads(int dividend, int maxThreads, int threadCount, bool* returnFlag);
 	~DivisorThreads();
 
 private:
@@ -13,7 +13,7 @@ private:
 
 	int dividend = 0;
 	int maxThreads = 0;
-	int* threadCount;
+	int threadCount;
 	bool* returnFlag;
 };
 

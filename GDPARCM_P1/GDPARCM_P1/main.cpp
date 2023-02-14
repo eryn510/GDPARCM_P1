@@ -5,23 +5,20 @@
 #include <thread>
 #include <cmath>
 
-int TEST_INT = 2147483647;
-int threadCount = 0;
-int maxThreads = pow(2,2);
-bool returnFlag = false;
 
-void createDivisorThreads()
+void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool* returnFlag)
 {
-	if (returnFlag == true)
+	if (*returnFlag == true)
 		return;
 
-	for (int i = 2; i < maxThreads + 2; i++)
+
+	for (int i = 0; i < maxThreads; i++)
 	{
-		if (returnFlag == false)
+		if (*returnFlag == false)
 		{
-			DivisorThreads* thread = new DivisorThreads(TEST_INT, maxThreads, &threadCount, &returnFlag);
+			DivisorThreads* thread = new DivisorThreads(testNumber, maxThreads, threadCount, returnFlag);
 			thread->start();
-			threadCount++;
+			threadCount += 1;
 		}
 		else
 			break;
@@ -31,11 +28,18 @@ void createDivisorThreads()
 	//IETThread::sleep(1000);
 }
 
-int main() {
+int main()
+{
+	int TEST_INT = 25; //2147483647;
+	int curr_threadCount = 0;
+	int maxThreads = pow(2, 2);
+	bool returnFlag = false;
 
-	createDivisorThreads();
+	createDivisorThreads(TEST_INT, maxThreads, curr_threadCount, &returnFlag);
 
-	while (!returnFlag) 
+	IETThread::sleep(2000);
+
+	while (returnFlag == false) 
 	{
 		std::cout << "I am computing. Please wait..." << std::endl;
 	}
