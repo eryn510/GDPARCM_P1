@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-DivisorThreads::DivisorThreads(int dividend, int maxThreads, int threadCount, bool* returnFlag, bool* isNumberPrime) : dividend(dividend), maxThreads(maxThreads), threadCount(threadCount), returnFlag(returnFlag), isNumberPrime(isNumberPrime)
+DivisorThreads::DivisorThreads(int dividend, int maxThreads, int threadCount) : dividend(dividend), maxThreads(maxThreads), threadCount(threadCount)
 {
 	
 }
@@ -30,25 +30,20 @@ void DivisorThreads::run()
 		if (i == 0)
 			i = 2;
 
-		//std::cout << "Checking: " << i << std::endl;
+		std::cout << "Checking: " << i << std::endl;
 
 		if (dividend % i == 0)
 		{
 			//std::cout << "Not a Prime Number" << std::endl;
 			//std::cout << "Divisor: " << i << std::endl;
-			*isNumberPrime = false;
-			*returnFlag = true;
+			this->isNumberPrime = false;
+			this->returnFlag = true;
 			break;
 		}
 		
 		//IETThread::sleep(1000);
 		
 	}
-	
-	
-	*isNumberPrime = true;
-	*returnFlag = true;
-	
-	
-	
+
+	this->returnFlag = true;
 }
