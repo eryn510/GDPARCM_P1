@@ -5,7 +5,7 @@ class DivisorThreads : public IETThread
 
 {
 public:
-	DivisorThreads(int dividend, int maxThreads, int threadCount, bool* returnFlag);
+	DivisorThreads(int dividend, int maxThreads, int threadCount, bool* returnFlag, bool* isNumberPrime);
 	~DivisorThreads();
 
 private:
@@ -15,5 +15,9 @@ private:
 	int maxThreads = 0;
 	int threadCount;
 	bool* returnFlag;
+	bool* isNumberPrime;
+
+public:
+	bool isThreadDone = false;
 };
 

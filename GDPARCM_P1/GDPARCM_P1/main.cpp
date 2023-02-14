@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool* returnFlag)
+void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool* returnFlag, bool* isNumberPrime)
 {
 	if (*returnFlag == true)
 		return;
@@ -16,7 +16,7 @@ void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool*
 	{
 		if (*returnFlag == false)
 		{
-			DivisorThreads* thread = new DivisorThreads(testNumber, maxThreads, threadCount, returnFlag);
+			DivisorThreads* thread = new DivisorThreads(testNumber, maxThreads, threadCount, returnFlag, isNumberPrime);
 			thread->start();
 			threadCount += 1;
 		}
@@ -30,18 +30,28 @@ void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool*
 
 int main()
 {
-	int TEST_INT = 25; //2147483647;
+	int TEST_INT = 100; //2147483647;
 	int curr_threadCount = 0;
 	int maxThreads = pow(2, 2);
 	bool returnFlag = false;
+	bool isNumberPrime = false;
 
-	createDivisorThreads(TEST_INT, maxThreads, curr_threadCount, &returnFlag);
+	createDivisorThreads(TEST_INT, maxThreads, curr_threadCount, &returnFlag, &isNumberPrime);
 
 	IETThread::sleep(2000);
 
 	while (returnFlag == false) 
 	{
 		std::cout << "I am computing. Please wait..." << std::endl;
+	}
+
+	if(isNumberPrime == false)
+	{
+		std::cout << "\nNUMBER IS NOT PRIME\n" << std::endl;
+	}
+	else
+	{
+		std::cout << "\nNUMBER IS PRIME\n" << std::endl;
 	}
 
 	/*
