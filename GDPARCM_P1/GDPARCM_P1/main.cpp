@@ -29,9 +29,10 @@ int main()
 {
 	auto start_time = std::chrono::high_resolution_clock::now();
 
-	int TEST_INT = 25;
+	int TEST_INT = 2147483647;
 	int curr_threadCount = 0;
 	int maxThreads = pow(2, 2);
+	int isNumberPrime = true;
 
 	bool isAllThreadsDone = false;
 
@@ -63,14 +64,13 @@ int main()
 		if (threadList[i]->isNumberPrime == false)
 		{
 			std::cout << "\nNUMBER IS NOT PRIME\n" << std::endl;
-			
-		}
-		else
-		{
-			std::cout << "\nNUMBER IS PRIME\n" << std::endl;
-			
+			isNumberPrime = false;
+			break;
 		}
 	}
+
+	if (isAllThreadsDone && isNumberPrime)
+		std::cout << "\nNUMBER IS PRIME\n" << std::endl;
 
 	auto end_time = std::chrono::high_resolution_clock::now();
 	auto elapsed_seconds = std::chrono::duration<double>(end_time - start_time).count();

@@ -30,7 +30,7 @@ void DivisorThreads::run()
 		if (i == 0)
 			i = 2;
 
-		std::cout << "Checking: " << i << std::endl;
+		//std::cout << "Checking: " << i << std::endl;
 
 		if (dividend % i == 0)
 		{
