@@ -4,9 +4,11 @@
 #include "IETThread.h"
 #include <thread>
 #include <cmath>
+#include <vector>
+#include <chrono>
 
 
-void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool* returnFlag, bool* isNumberPrime)
+void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool* returnFlag, bool* isNumberPrime, std::vector<DivisorThreads*>* threadList)
 {
 	if (*returnFlag == true)
 		return;
@@ -18,6 +20,7 @@ void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool*
 		{
 			DivisorThreads* thread = new DivisorThreads(testNumber, maxThreads, threadCount, returnFlag, isNumberPrime);
 			thread->start();
+			threadList->push_back(thread);
 			threadCount += 1;
 		}
 		else
@@ -30,40 +33,50 @@ void createDivisorThreads(int testNumber, int maxThreads, int threadCount, bool*
 
 int main()
 {
-	int TEST_INT = 100; //2147483647;
+	auto start_time = std::chrono::high_resolution_clock::now();
+
+	int TEST_INT = 2147483647;
 	int curr_threadCount = 0;
-	int maxThreads = pow(2, 2);
+	int maxThreads = pow(2, 10);
 	bool returnFlag = false;
 	bool isNumberPrime = false;
+	bool isAllThreadsDone = false;
 
-	createDivisorThreads(TEST_INT, maxThreads, curr_threadCount, &returnFlag, &isNumberPrime);
+	std::vector<DivisorThreads*> threadList;
 
-	IETThread::sleep(2000);
+	createDivisorThreads(TEST_INT, maxThreads, curr_threadCount, &returnFlag, &isNumberPrime, &threadList);
 
-	while (returnFlag == false) 
+	//IETThread::sleep(5000);
+
+	while (isAllThreadsDone == false) 
 	{
-		std::cout << "I am computing. Please wait..." << std::endl;
-	}
-
-	if(isNumberPrime == false)
-	{
-		std::cout << "\nNUMBER IS NOT PRIME\n" << std::endl;
-	}
-	else
-	{
-		std::cout << "\nNUMBER IS PRIME\n" << std::endl;
-	}
-
-	/*
-	for (int i = 2; i < (TEST_INT / 2); i++)
-	{
-		if (TEST_INT % i == 0)
+		isAllThreadsDone = true;
+		for(int i = 0; i < threadList.size(); i++)
 		{
-			std::cout << "Not a Prime" << std::endl;
+			if(*(threadList[i]->returnFlag) == false)
+			{
+				isAllThreadsDone = false;
+			}
+		}
+	}
+
+	for(int i = 0; i < threadList.size(); i++)
+	{
+		if (*(threadList[i]->isNumberPrime) == false)
+		{
+			std::cout << "\nNUMBER IS NOT PRIME\n" << std::endl;
+			break;
+		}
+		else
+		{
+			std::cout << "\nNUMBER IS PRIME\n" << std::endl;
 			break;
 		}
 	}
 
-	std::cout << "Prime" << std::endl;
-	*/
+	auto end_time = std::chrono::high_resolution_clock::now();
+	auto elapsed_seconds = std::chrono::duration<double>(end_time - start_time).count();
+	std::cout << "Elapsed time: " << elapsed_seconds << " seconds" << std::endl;
+
+
 }

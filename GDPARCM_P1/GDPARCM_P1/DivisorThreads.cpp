@@ -20,16 +20,8 @@ void DivisorThreads::run()
 
 
 
-	std::cout << "maxdivisorcheck:" + std::to_string(maxDivisor) << std::endl;
-	
+	//std::cout << "maxdivisorcheck:" + std::to_string(maxDivisor) << std::endl;
 
-	/*
-		TO DO:
-		ayusin yung pagdisplay if prime ba si test int or hindi, tinry ko kasi 100 as test int puro prime number lang nilabas
-		kahit na hindi prime si 100
-
-		same case as kay 25 as test int
-	*/
 
 
 	
@@ -38,24 +30,22 @@ void DivisorThreads::run()
 		if (i == 0)
 			i = 2;
 
-		std::cout << "Divisor: " << i << std::endl;
+		//std::cout << "Checking: " << i << std::endl;
 
-		
-		
 		if (dividend % i == 0)
 		{
 			//std::cout << "Not a Prime Number" << std::endl;
-			std::cout << "Divisor: " << i << std::endl;
+			//std::cout << "Divisor: " << i << std::endl;
 			*isNumberPrime = false;
 			*returnFlag = true;
 			break;
 		}
 		
 
-		IETThread::sleep(2000);
+		
 	}
 	
-	IETThread::sleep(2000);
+	IETThread::sleep(5000);
 	*isNumberPrime = true;
 	*returnFlag = true;
 	

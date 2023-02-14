@@ -14,10 +14,9 @@ private:
 	int dividend = 0;
 	int maxThreads = 0;
 	int threadCount;
-	bool* returnFlag;
-	bool* isNumberPrime;
 
 public:
-	bool isThreadDone = false;
+	bool* returnFlag;
+	bool* isNumberPrime;
 };
 
