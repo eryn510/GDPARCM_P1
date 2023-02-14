@@ -41,11 +41,11 @@ void DivisorThreads::run()
 			break;
 		}
 		
-
+		//IETThread::sleep(1000);
 		
 	}
 	
-	IETThread::sleep(5000);
+	
 	*isNumberPrime = true;
 	*returnFlag = true;
 	
